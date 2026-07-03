@@ -1,0 +1,31 @@
+on: push
+name: 🚀 Deploy website on push
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v4
+
+      - name: 🔑 Generate config.php
+        run: |
+          cat > config.php << 'EOF'
+          <?php
+          define('PASSWORD', '${{ secrets.ADD_PASSWORD }}');
+          EOF
+
+      - name: 📂 Sync files
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.6
+        with:
+          server: ${{ vars.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          exclude: |
+            data/**
+            .git*
+            .git*/**
+            .gitignore
+            .github*
+            .github*/**
