@@ -37,12 +37,5 @@ function validateListing($content) {
         return false;
     }
 
-    foreach ($lines as $line) {
-        $parsed = parseLine($line);
-        if (!str_contains($parsed['text'], ' - ')) {
-            return false;
-        }
-    }
-
     return true;
 }
