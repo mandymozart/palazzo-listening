@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Listening Sessions</title>
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=<?= filemtime(__DIR__ . '/style.css') ?>">
 </head>
 <body>
 
@@ -49,7 +49,7 @@ foreach ($files as $file) {
 
 <div id="qr"></div>
 <p id="qr-url"></p>
-<script src="qrcode.js"></script>
+<script src="qrcode.js?v=<?= filemtime(__DIR__ . '/qrcode.js') ?>"></script>
 <script>
 // QR code for the address this page was opened at.
 const url = location.origin + location.pathname.replace(/index\.php$/, '');
