@@ -13,7 +13,7 @@ jobs:
         run: |
           cat > config.php << 'EOF'
           <?php
-          define('PASSWORD', '${{ secrets.ADD_PASSWORD }}');
+          define('TOKEN', '${{ secrets.ADD_PASSWORD }}');
           EOF
 
       - name: 📂 Sync files

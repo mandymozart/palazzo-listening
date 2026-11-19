@@ -3,6 +3,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Listening Sessions</title>
 <link rel="stylesheet" href="style.css">
 </head>
@@ -10,6 +11,7 @@
 
 <?php
 $files = listSessions();
+$today = date('Y-m-d');
 
 if (empty($files)) {
     echo "<p>No listening sessions yet.</p>";
@@ -21,13 +23,16 @@ foreach ($files as $file) {
     $title = $timestamp ? date('F j, Y', $timestamp) : $date;
 
     echo "<h2>" . htmlspecialchars($title) . "</h2>\n";
-    echo "<ul>\n";
 
-    $lines = file($file, FILE_IGNORE_NEW_LINES);
+    $lines = array_filter(file($file, FILE_IGNORE_NEW_LINES), fn($l) => trim($l) !== '');
+
+    if (empty($lines)) {
+        echo $date >= $today ? "<p>Upcoming. Songs will be listed here.</p>\n" : "<p>No songs listed.</p>\n";
+        continue;
+    }
+
+    echo "<ul>\n";
     foreach ($lines as $line) {
-        if (trim($line) === '') {
-            continue;
-        }
         $parsed = parseLine($line);
         $text = htmlspecialchars($parsed['text']);
 
@@ -38,13 +43,12 @@ foreach ($files as $file) {
             echo "<li>$text</li>\n";
         }
     }
-
     echo "</ul>\n";
 }
 ?>
 
 <footer>
-<a href="add.php">Add a listening session</a>
+<a href="add.php">Add or edit sessions</a>
 </footer>
 
 </body>
