@@ -47,8 +47,10 @@ foreach ($files as $file) {
 }
 ?>
 
+<div id="qr-box">
 <div id="qr"></div>
 <p id="qr-url"></p>
+</div>
 <script src="qrcode.js?v=<?= filemtime(__DIR__ . '/qrcode.js') ?>"></script>
 <script>
 // QR code for the address this page was opened at.

@@ -16,8 +16,28 @@ ul {
     padding: 0;
 }
 
-#qr {
+#qr-box {
     margin-top: 2rem;
+}
+
+/* Desktop: QR code fixed in the right half, list stays on the left. */
+@media (min-width: 900px) {
+    body {
+        max-width: calc(50% - 4rem);
+    }
+
+    #qr-box {
+        position: fixed;
+        top: 2rem;
+        left: 50%;
+        width: calc(50% - 2rem);
+        margin: 0;
+    }
+
+    #qr svg {
+        width: min(100%, 26rem);
+        height: auto;
+    }
 }
 
 footer {
