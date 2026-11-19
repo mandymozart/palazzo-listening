@@ -10,37 +10,21 @@ h2 {
     margin: 2rem 0 0.5rem;
 }
 
+h2:first-child {
+    margin-top: 0;
+}
+
 ul {
     list-style: none;
     margin: 0;
     padding: 0;
 }
 
-#qr-box {
+footer {
     margin-top: 2rem;
 }
 
-/* Desktop: QR code fixed in the right half, list stays on the left. */
-@media (min-width: 900px) {
-    body {
-        max-width: calc(50% - 4rem);
-    }
-
-    #qr-box {
-        position: fixed;
-        top: 2rem;
-        left: 50%;
-        width: calc(50% - 2rem);
-        margin: 0;
-    }
-
-    #qr svg {
-        width: min(100%, 26rem);
-        height: auto;
-    }
-}
-
-footer {
+#qr-box {
     margin-top: 2rem;
 }
 
@@ -65,4 +49,47 @@ textarea {
 
 textarea {
     width: 100%;
+}
+
+/* Mobile: use the full page width. */
+@media (max-width: 899px) {
+    body {
+        margin: 1rem;
+    }
+
+    input:not([type="file"]) {
+        width: 100%;
+    }
+}
+
+/* Desktop: content on the left half, extras on the right half. */
+@media (min-width: 900px) {
+    body.home {
+        max-width: calc(50% - 4rem);
+    }
+
+    #qr-box {
+        position: fixed;
+        top: 2rem;
+        left: 50%;
+        width: calc(50% - 2rem);
+        margin: 0;
+    }
+
+    #qr svg {
+        width: min(100%, 26rem);
+        height: auto;
+    }
+
+    .cols {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 4rem;
+        align-items: start;
+    }
+
+    .side {
+        position: sticky;
+        top: 2rem;
+    }
 }

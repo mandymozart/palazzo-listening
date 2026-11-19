@@ -7,7 +7,7 @@
 <title>Listening Sessions</title>
 <link rel="stylesheet" href="style.css?v=<?= filemtime(__DIR__ . '/style.css') ?>">
 </head>
-<body>
+<body class="home">
 
 <?php
 $files = listSessions();
@@ -50,6 +50,9 @@ foreach ($files as $file) {
 <div id="qr-box">
 <div id="qr"></div>
 <p id="qr-url"></p>
+<footer>
+<a href="add.php">Add or edit sessions</a>
+</footer>
 </div>
 <script src="qrcode.js?v=<?= filemtime(__DIR__ . '/qrcode.js') ?>"></script>
 <script>
@@ -61,10 +64,6 @@ qr.make();
 document.getElementById('qr').innerHTML = qr.createSvgTag(6, 0);
 document.getElementById('qr-url').textContent = url;
 </script>
-
-<footer>
-<a href="add.php">Add or edit sessions</a>
-</footer>
 
 </body>
 </html>

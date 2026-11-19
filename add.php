@@ -64,13 +64,10 @@ if ($posting) {
 </head>
 <body>
 
+<form id="form" class="cols" method="post" enctype="multipart/form-data">
+<div>
 <h2>Add or edit a listening session</h2>
-
 <p>Pick a date. Leave the listing empty to announce an upcoming session.</p>
-
-<?php if ($saved): ?>
-<p>Saved.</p>
-<?php endif; ?>
 
 <?php if ($errors): ?>
 <ul>
@@ -80,20 +77,21 @@ if ($posting) {
 </ul>
 <?php endif; ?>
 
-<form id="form" method="post" enctype="multipart/form-data">
-<label>Token
-<input type="password" name="token" value="<?= htmlspecialchars($posting ? field('token') : 'admin') ?>" required autocomplete="off"></label>
 <label>Date
 <input type="date" name="date" value="<?= htmlspecialchars(isValidDate($date) ? $date : '') ?>" required></label>
 <label>Listing (one song per line: Song - Artist, optionally followed by a link)
 <textarea name="listing" rows="30" cols="80"><?= htmlspecialchars($listing) ?></textarea></label>
-<label>Or load a file (.txt / .md)
-<input type="file" name="file" accept=".txt,.md"></label>
+</div>
+
+<div class="side">
+<label>Token
+<input type="password" name="token" value="<?= htmlspecialchars($posting ? field('token') : 'admin') ?>" required autocomplete="off"></label>
 <p>
 <button type="submit">Save</button>
-<span id="status">Changes are saved automatically.</span>
+<span id="status"><?= $saved ? 'Saved.' : 'Changes are saved automatically.' ?></span>
 </p>
-</form>
+<label>Or load a file (.txt / .md)
+<input type="file" name="file" accept=".txt,.md"></label>
 
 <h2>Edit a session</h2>
 <ul>
@@ -107,6 +105,8 @@ if ($posting) {
 <footer>
 <a href="index.php">Back to list</a>
 </footer>
+</div>
+</form>
 
 <script>
 const form = document.getElementById('form');
