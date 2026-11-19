@@ -47,6 +47,19 @@ foreach ($files as $file) {
 }
 ?>
 
+<div id="qr"></div>
+<p id="qr-url"></p>
+<script src="qrcode.js"></script>
+<script>
+// QR code for the address this page was opened at.
+const url = location.origin + location.pathname.replace(/index\.php$/, '');
+const qr = qrcode(0, 'M');
+qr.addData(url);
+qr.make();
+document.getElementById('qr').innerHTML = qr.createSvgTag(6, 0);
+document.getElementById('qr-url').textContent = url;
+</script>
+
 <footer>
 <a href="add.php">Add or edit sessions</a>
 </footer>
